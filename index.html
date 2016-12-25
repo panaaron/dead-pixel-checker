@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-      <title>Weather Scraper</title>
+      <title>Dead Pixel Test</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
       
@@ -30,47 +30,100 @@
               
               text-align: center;
               margin-top: 100px;
-              width: 450px;
+              margin-left: auto;
+              margin-right: auto;
+              max-width: 500px;
+              background: none;
               
+          }
+          .row{
+              text-align: center;
           }
           
-          input {
+          #desc {
               
-              margin: 20px 0;
-              
-          }
-          
-          #weather {
-              
-              margin-top:15px;
+              margin: 50px 0;
               
           }
+
          
       </style>
       
   </head>
   <body>
     
-      <div class="container">
+      <div class="container" id="main_container">
       
-          <h1>What's The Weather?</h1>
+          <div class="row">
+            
+
+              <h1>Dead Pixel Test</h1>
+
+              <p id="desc">Simple program to easily identify dead pixels on your LED/LCD screen through fullscreen RGB colors.</p>
+
+              <div class="alert alert-success" role="alert">Press the <strong>Enter</strong> Key to go to the <strong>next</strong> color</div>
+              <div class="alert alert-info" role="alert">Press the <strong>Space</strong> Key to go to the <strong>previous</strong> color</div>
+        
+              
+          </div>
           
-          
-          
-          <form>
-  <fieldset class="form-group">
-    <label for="city">Enter the name of a city.</label>
-    <input type="text" class="form-control" name="city" id="city" placeholder="Eg. London, Tokyo" value = "Test">
-  </fieldset>
-  
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
       
-          <div id="weather">Hi</div>
+      
       </div>
 
     <!-- jQuery first, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    
+      
+    <script type="text/javascript">
+
+      var i = 0;
+      var colors = ['rgba(0, 0, 0, 0) url("background.jpeg") no-repeat fixed 50% 50% / cover padding-box border-box',
+                    "black", 
+                    "white", 
+                    "green", 
+                    "blue", 
+                    "red"
+                   ];
+      
+      $(document).ready(function(){
+          $(document).keypress(function(e){
+              console.log(e);
+              if (e.which == 13){
+                i += 1;
+              }
+              if (e.which == 32) {
+                i -= 1;
+                
+              }
+              
+              if (i == colors.length){
+                  i = 0;
+              }
+              if ( i < 0) {
+                  i = colors.length - 1 ;
+              }
+              //alert(i);
+              $("html").css("background",colors[i]);
+              //alert($("html").css("background"));
+              if (i != 0){
+                  $("#main_container").hide("fast");
+              }
+              else{
+                  $("#main_container").show("fast");
+              }
+              
+              
+              
+          })
+          
+      })
+      
+      
+      
+      </script>
+      
+    
   </body>
 </html>
